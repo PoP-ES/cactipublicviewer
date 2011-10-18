@@ -1,0 +1,56 @@
+1. Introdução
+
+Este é um sistema simples para visualização de gráficos do Cacti, desenvolvido em PHP e Javascript. Além disso, ele acompanha um patch do weathermap 0.91a para suporte a clique nos links.
+
+2. Configuração das interfaces
+
+As configurações são feitas no arquivo graphcode.xml. 
+
+Esse arquivo contém um nó para configuração da url do Cacti, denominado <cactiurl>. 
+Além disso, contém um nó para cadastro das instituições, e suas respectivas interfaces. Atualmente para cada interface, podem ser plotados gráficos de tráfego, erro, unicast e multicast (é fácil de extender para qualquer tipo de gráfico). 
+O repositório contém um exemplo do arquivo graphcode.xml.
+
+3. Configuração do Cacti
+
+Os gráficos do cacti devem estar configurados para serem acessados publicamente.
+
+4. Instalação 
+
+Copiar os arquivos para uma pasta acessível do seu servidor web. 
+Acesse o endereço: http://seuip/pasta/mod_graph.php
+
+5. Weathermap
+
+Para instalar o patch do weathermap, copie o arquivo weathermap.patch para o diretório do seu weathermap, e rode o seguinte comando:
+    patch -p0 <weathermap.patch
+
+No seu arquivo de configuração do weathermap, você poderá adicionar a opção:
+    OVERLIBCLICK URL
+    OVERLIBCLICK_HEIGHT 1170
+    OVERLIBCLICK_WIDTH 550
+
+OVERLIBCLICK_HEIGHT e OVERLIBCLICK_WIDTH definem o tamanho da janela que irá abrir. Essa opção pode ser global, ou sobrescrita pelo LINK
+    
+Quando o elemento for clicado, a url definida por você irá abrir em um janela. No caso do deste sistema, a configuração ficaria da seguinte forma:
+    LINK seulink
+        ...
+        OVERLIBCLICK http://seusite/pastadosoftware/mod_graph.php?ginst=COD&gtype=TIPO&gintf=NUM&showinsts=0
+        
+Onde:
+    COD: é o código da instituição definido no XML
+    TIPO: é o tipo de gráfico que irá abrir por padrão: [traffic|error|packetsUni|packetsMul]
+    NUM: Número da interface definido no XML
+
+6. Contribuindo
+
+Para contribuir com o projeto, basta enviar para o endereço <noc at pop-es.rnp.br> patches ou pull-requests com signed-off, ou seja, adicionar linha "Signed-off-by: Name <email>" no final de cada commit. 
+
+See: http://gerrit.googlecode.com/svn/documentation/2.0/user-signedoffby.html
+
+7. Softwares de terceiros utilizados
+
+jquery.js is the jQuery javascript library - written by John Resig and collaborators.
+http://docs.jquery.com/Licensing
+
+css/ and jquery-ui.js is the jQuery-UI based on jQuery javascript library
+http://jquery.org/license/

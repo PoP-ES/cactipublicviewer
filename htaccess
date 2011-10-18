@@ -1,0 +1,6 @@
+RewriteEngine On
+RewriteCond %{HTTP_REFERER} !^http://SEUSITE/.*$ [NC]
+RewriteCond %{HTTP_REFERER} !^http://SEUWEATHERMAP/.*$ [NC]
+RewriteCond %{REMOTE_HOST} !=IP
+RewriteCond %{REMOTE_HOST} !=IPV6
+RewriteRule .* http://SEUSITE

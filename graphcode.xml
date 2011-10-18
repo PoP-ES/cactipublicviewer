@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+<cactiurl>http://SEUSITE/cacti/</cactiurl>
+<!-- pai não esta sendo utilizado -->
+
+<instituicao cod="uplink">
+	<instDesc>UPLINK</instDesc>
+	<interface num="0" desc="lsq-0/0/0.1">
+		<interfDesc>INTERFACE AGREGADA</interfDesc>
+		<traffic>1163</traffic>
+		<error>1138</error>
+		<packetsUni>1143</packetsUni>
+		<packetsMul>1148</packetsMul>
+	</interface>
+	<interface num="1" desc="e1-1/0/0">
+		<interfDesc>Link 1 - 2M</interfDesc>
+		<traffic>518</traffic>
+		<error>520</error>
+		<packetsUni>885</packetsUni>
+		<packetsMul>1244</packetsMul>
+	</interface>
+	<interface num="2" desc="e1-1/0/1">
+		<interfDesc>Link 2 - 2M</interfDesc>
+		<traffic>575</traffic>
+		<error>577</error>
+		<packetsUni>883</packetsUni>
+		<packetsMul>1245</packetsMul>
+	</interface>
+</instituicao>
+
+</root>

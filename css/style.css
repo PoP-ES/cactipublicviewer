@@ -1,0 +1,67 @@
+*{
+	margin:0;
+	padding:0;
+}
+body{
+	background:#fff;
+	color:#666;	
+	font:12px/18px Tahoma, Arial, Helvetica, sans-serif;	
+}
+select{
+	padding: 2px;
+	font-size: 12px;
+	//border: 1px solid silver;
+	background:#fff;
+	margin-left: 4;
+	margin-right: 4;
+	margin-top: 4;
+}
+#menuIntf{
+	width:550px;
+}
+#menuIntf ul{
+	list-style:none;
+	padding:0;
+	margin-top: 0;
+}
+#menuIntf li{
+	list-style:none;
+	display:inline;
+	margin:0 15px;
+	padding:0;
+	background:none;
+}
+#menuIntf li a{
+	color:#999999;
+	/*	text-transform:uppercase;*/
+	font-size:11px;
+	font-weight:bold;
+	text-decoration:none;
+	//border-bottom:3px solid #999999;
+	cursor:pointer;
+	padding:0 0 1px 0;
+	background: none;
+}
+#menuIntf li a:hover{
+	//border-bottom:3px solid #999999;
+	color:#505050;
+	text-decoration:none;
+}
+#menuIntf li a[rel="ativo"]{
+	
+	border-bottom:2px solid #505050;
+	color:#505050;
+	/*text-transform:uppercase;*/
+	font-size:11px;
+	font-weight:bold;
+	text-decoration:none;
+}
+#menuIntf li a:hover[rel="ativo"]{
+	//border-bottom:3px solid #505050;
+	color:#505050;
+	text-decoration:none;
+}
+#graphs img{
+	max-width: 520px; 
+	height: 200px;
+}

@@ -1,0 +1,100 @@
+--- Weathermap.class.php	2010-03-08 17:07:45.000000000 -0300
++++ Weathermap.class.php.teste	2011-10-14 15:18:30.000000000 -0300
+@@ -160,6 +160,8 @@
+ 	var $configline;
+ 	var $infourl;
+ 	var $overliburl;
++	var $overlibclick;
++	var $overlibclickheight, $overlibclickwidth;
+ 	var $overlibwidth, $overlibheight;
+ 	var $overlibcaption;
+ 	var $my_default;
+@@ -204,6 +206,8 @@
+ 		$timey;
+ 	var $width,
+ 		$height;
++        var $overlibclickwidht,
++		$overlibclickheight;
+ 	var $keyx,
+ 		$keyy, $keyimage;
+ 	var $titlex,
+@@ -2275,6 +2279,8 @@
+ 					array('NODE', "/^\s*LABEL\s+(.*)\s*$/i", array('label'=>1)),
+ 					array('(LINK|GLOBAL)', "/^\s*WIDTH\s+(\d+)\s*$/i", array('width'=>1)),
+ 					array('(LINK|GLOBAL)', "/^\s*HEIGHT\s+(\d+)\s*$/i", array('height'=>1)),
++					array('(LINK|GLOBAL)', "/^\s*OVERLIBCLICK_WIDTH\s+(\d+)\s*$/i", array('overlibclickwidth'=>1)),
++					array('(LINK|GLOBAL)', "/^\s*OVERLIBCLICK_HEIGHT\s+(\d+)\s*$/i", array('overlibclickheight'=>1)),
+ 					array('LINK', "/^\s*WIDTH\s+(\d+\.\d+)\s*$/i", array('width'=>1)),
+ 					array('LINK', '/^\s*ARROWSTYLE\s+(classic|compact)\s*$/i', array('arrowstyle'=>1)),
+ 					array('LINK', '/^\s*VIASTYLE\s+(curved|angled)\s*$/i', array('viastyle'=>1)),
+@@ -2559,6 +2565,18 @@
+ 					}
+ 			}			
+ 		
++			if (preg_match("/^\s*OVERLIBCLICK\s+(.+)$/i", $buffer, $matches))
++			{
++				$this->has_overlibs = TRUE;
++				if($last_seen == 'LINK' || $last_seen=='NODE' ) {
++					$urls = preg_split('/\s+/', $matches[1], -1, PREG_SPLIT_NO_EMPTY);
++					$curobj->overlibclick[0]=$urls;
++					$curobj->overlibclick[1]=$urls;
++					$linematched++;
++				}
++			}			
++
++			
+ 			// array('(NODE|LINK)', '/^\s*TEMPLATE\s+(\S+)\s*$/i', array('template'=>1)),
+ 				
+ 			if ( ( $last_seen=='NODE' || $last_seen=='LINK' ) && preg_match("/^\s*TEMPLATE\s+(\S+)\s*$/i", $buffer, $matches))
+@@ -3795,7 +3813,6 @@
+ 							$n = 0;
+ 							if(sizeof($myobj->overliburl[$dir]) > 0)
+ 							{
+-								// print "ARRAY:".is_array($link->overliburl[$dir])."\n";
+ 								foreach ($myobj->overliburl[$dir] as $url)
+ 								{
+ 									if($n>0) { $overlibhtml .= '&lt;br /&gt;'; }
+@@ -3817,11 +3834,42 @@
+ 							$overlibhtml .= "',DELAY,250,${left}${above}CAPTION,'" . $caption
+ 							. "');\"  onmouseout=\"return nd();\"";
+ 							
++							$overlibhtml .= "onclick=\"return overlib('";
++							# get overlibwidth and overlibheight. if obj doesnt have this, get from global
++							if (!$myobj->overlibclickheight)
++								if ($this->overlibclickheight)
++									$myobj->overlibclickheight = $this->overlibclickheight;
++							if (!$myobj->overlibclickwidth)
++								if ($this->overlibclickwidth)
++									$myobj->overlibclickwidth = $this->overlibclickwidth;
++							
++							$n = 0;
++							if(sizeof($myobj->overlibclick[$dir]) > 0)
++							{
++								foreach ($myobj->overlibclick[$dir] as $url)
++								{
++									if($n>0) { $overlibhtml .= '&lt;br /&gt;'; }
++									$overlibhtml .= "&lt;iframe id=overlibclick width=".$myobj->overlibclickwidth." height=".$myobj->overlibclickheight." src=" . $this->ProcessString($url,$myobj) . "&gt;";
++									$n++;
++								}
++							}
++							if(trim($myobj->notestext[$dir]) != '')
++							{
++								# put in a linebreak if there was an image AND notes
++								if($n>0) $overlibhtml .= '&lt;br /&gt;';
++								$note = $this->ProcessString($myobj->notestext[$dir],$myobj);
++								$note = htmlspecialchars($note, ENT_NOQUOTES);
++								$note=str_replace("'", "\\&apos;", $note);
++								$note=str_replace('"', "&quot;", $note);
++								$overlibhtml .= $note;
++							}
++							$overlibhtml .= "',OFFSETX,-20,OFFSETY,-100,STICKY,CLOSECLICK,CLOSETEXT,'Fechar',HAUTO,WIDTH,$myobj->overlibclickwidth,HEIGHT,$myobj->overlibclickheight,CAPTION,'" . $caption . "');\"";
++
++							
+ 							foreach ($parts as $part)
+ 							{
+ 								$areaname = $type.":" . $prefix . $myobj->id. ":" . $part;
+ 								//print "INFOURL for $areaname - ";
+-							
+ 								$this->imap->setProp("extrahtml", $overlibhtml, $areaname);
+ 							}
+ 						}
