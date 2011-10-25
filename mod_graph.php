@@ -34,7 +34,7 @@ $showInsts = ( isset($_GET['showinsts']) ? $_GET['showinsts'] : 1 );
 
 if ($showInsts == 1)
 {
-	echo "<br>Visualize estatísticas e informações históricas dos enlaces das redes conectadas ao PoP-ES/RNP. Selecione a referência abaixo.";
+	echo "<br>Coloque seu texto aqui";
 	echo "<br><br>";
 	echo "<div id='menu'>";
 	echo "<select id='selectedInst' class='menu-client'>
