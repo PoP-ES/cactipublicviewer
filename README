@@ -45,7 +45,7 @@ Onde:
 
 6. Contribuindo
 
-Para contribuir com o projeto, basta enviar para o endereço <noc at pop-es.rnp.br> patches ou pull-requests com signed-off, ou seja, adicionar linha "Signed-off-by: Name <email>" no final de cada commit. 
+Para contribuir com o projeto, basta enviar para o endereço <apps at pop-es.rnp.br> patches ou pull-requests com signed-off, ou seja, adicionar linha "Signed-off-by: Name <email>" no final de cada commit. 
 
 See: http://gerrit.googlecode.com/svn/documentation/2.0/user-signedoffby.html
 
