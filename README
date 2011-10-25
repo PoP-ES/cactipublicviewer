@@ -12,7 +12,9 @@ O repositório contém um exemplo do arquivo graphcode.xml.
 
 3. Configuração do Cacti
 
-Os gráficos do cacti devem estar configurados para serem acessados publicamente.
+Os gráficos do cacti devem estar configurados para serem acessados publicamente, através do usuário guest.
+
+Usando o usuário guest padrão do cacti, é só desmarcar a opção "User Must Change Password at Next Login " e marcar a opção "Show the page that user pointed their browser to."
 
 4. Instalação 
 
