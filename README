@@ -31,6 +31,9 @@ endereço: http://seuip/pasta/mod_graph.php
 
 5. Weathermap
 
+Foi feito um patch para integração com o weathermap 0.97a. Ao clicar em cima do enlace,
+será aberto a interface de exibição.
+
 Para instalar o patch do weathermap, copie o arquivo weathermap.patch para o
 diretório do seu weathermap, e rode o seguinte comando: patch -p0
 <weathermap.patch
